@@ -80,11 +80,6 @@ export default function CartDrawer() {
                           <p className="font-mono-vt text-[9px] tracking-[0.15em] uppercase text-[#A0A0A0]/60 mt-0.5">
                             {product.subtitle}
                           </p>
-                          <div
-                            className="w-3 h-3 rounded-full mt-1.5 border border-white/20"
-                            style={{ backgroundColor: item.selectedColor }}
-                            title={product.colors.find((c) => c.hex === item.selectedColor)?.name}
-                          />
                         </div>
                         <button
                           onClick={() => removeFromCart(item.productId)}

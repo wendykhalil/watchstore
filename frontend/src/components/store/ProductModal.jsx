@@ -4,14 +4,12 @@ import { useStore } from '../../context/StoreContext';
 export default function ProductModal() {
   const { selectedProduct: product, setSelectedProduct, addToCart, favorites, toggleFavorite } = useStore();
   const [imgIndex, setImgIndex] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(0);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
 
   useEffect(() => {
     if (product) {
       setImgIndex(0);
-      setSelectedColor(0);
       setQty(1);
       setAdded(false);
       document.body.style.overflow = 'hidden';
@@ -25,7 +23,7 @@ export default function ProductModal() {
   const liked = favorites.includes(product.id);
 
   const handleAdd = () => {
-    addToCart(product.id, product.colors[selectedColor].hex, qty);
+    addToCart(product.id, product.colors[0].hex, qty);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
@@ -105,27 +103,6 @@ export default function ProductModal() {
             </div>
 
             <p className="text-[#A0A0A0] leading-relaxed text-sm">{product.longDescription}</p>
-
-            {/* Color selector */}
-            <div>
-              <p className="font-mono-vt text-[10px] tracking-[0.2em] uppercase text-[#A0A0A0]/60 mb-3">
-                Color — <span className="text-white">{product.colors[selectedColor].name}</span>
-              </p>
-              <div className="flex gap-3">
-                {product.colors.map((c, i) => (
-                  <button
-                    key={c.name}
-                    onClick={() => setSelectedColor(i)}
-                    title={c.name}
-                    className={`w-8 h-8 rounded-full border-2 transition-all ${
-                      i === selectedColor ? 'border-[#00C896] scale-110' : 'border-white/20 hover:border-white/50'
-                    }`}
-                    style={{ backgroundColor: c.hex }}
-                    aria-label={c.name}
-                  />
-                ))}
-              </div>
-            </div>
 
             {/* Quantity */}
             <div>

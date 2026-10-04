@@ -104,19 +104,6 @@ export default function ProductCard({ product }) {
         </div>
         <p className="text-[#A0A0A0] text-sm leading-relaxed mb-5 flex-1">{product.description}</p>
 
-        {/* Colors */}
-        <div className="flex items-center gap-2 mb-5">
-          <span className="font-mono-vt text-[9px] tracking-[0.2em] uppercase text-[#A0A0A0]/60 mr-1">Colors</span>
-          {product.colors.map((c) => (
-            <div
-              key={c.name}
-              title={c.name}
-              className="w-4 h-4 rounded-full border border-white/20 hover:scale-110 transition-transform cursor-default"
-              style={{ backgroundColor: c.hex }}
-            />
-          ))}
-        </div>
-
         {/* Actions */}
         <div className="flex gap-2">
           <button
