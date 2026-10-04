@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Order = require("../models/Order");
 const Product = require("../models/Product");
+const emailService = require("./emailService");
 
 const validateObjectId = (id) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -72,6 +73,14 @@ const createOrder = async (orderData) => {
       { $inc: { stock: -update.quantity } },
       { runValidators: true }
     );
+  }
+
+  // 6. Send new order notification email (non-blocking)
+  try {
+    emailService.sendNewOrderEmail(order, customer);
+  } catch (emailError) {
+    console.error("Failed to send order notification:", emailError.message);
+    // Continue even if email fails
   }
 
   return order;
