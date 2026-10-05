@@ -1,13 +1,7 @@
-const mongoose = require("mongoose");
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 const emailService = require("./emailService");
-
-const validateObjectId = (id) => {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new Error(`Invalid ID format: ${id}`);
-  }
-};
+const validateObjectId = require("../utils/validateObjectId");
 
 const createOrder = async (orderData) => {
   const { customer, items } = orderData;

@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const connectDB = require("./config/db");
 
 const productRoutes = require("./routes/productRoutes");
@@ -19,6 +20,12 @@ if (missingEnvVars.length > 0) {
 }
 
 const app = express();
+
+app.use(cors({
+  origin: "http://localhost:5173", // Default Vite development port
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
 
 app.use(express.json());
 

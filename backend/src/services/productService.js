@@ -1,11 +1,5 @@
-const mongoose = require("mongoose");
 const Product = require("../models/Product");
-
-const validateObjectId = (id) => {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new Error(`Invalid ID format: ${id}`);
-  }
-};
+const validateObjectId = require("../utils/validateObjectId");
 
 const createProduct = async (productData) => {
   const product = await Product.create(productData);
